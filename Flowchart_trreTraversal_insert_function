@@ -1,0 +1,40 @@
+This will help understand the flow:
+
+[ Start: insert(root, value) ]
+                     │
+                     ▼
+           /───────────────────\
+          <   Is root == NULL?  >
+           \───────────────────/
+                     │
+            Yes ─────┴───── No
+            │               │
+            ▼               ▼
+   [ Create new node ]   [ Run countNodes() and getHeight() ]
+   [   and return it ]   [   on both Left & Right subtrees  ]
+            │               │
+      (Exit Function)       ▼
+                 /───────────────────────────\
+                <  Is Left Subtree not full?  >
+                 \───────────────────────────/
+                           │
+                  Yes ─────┴───── No
+                  │               │
+                  ▼               ▼
+         [ Recurse Left: ]     /────────────────────────────\
+         [ root->left =  ]    <   Is Right Subtree not full  >
+         [ insert(left)  ]     \   OR is Left Height == Right?>
+                  │             \────────────────────────────/
+                  │                       │
+                  │              Yes ─────┴───── No
+                  │              │               │
+                  │              ▼               ▼
+                  │     [ Recurse Right: ]     [ Recurse Left: ]
+                  │     [ root->right =  ]     [ root->left =  ]
+                  │     [ insert(right)  ]     [ insert(left)  ]
+                  │              │               │
+                  └──────────────┼───────────────┘
+                                 ▼
+                          [ Return root ]
+                                 │
+                           (Exit Function)
